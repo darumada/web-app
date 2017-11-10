@@ -3,7 +3,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'www'),
-    filename: 'build.js'
+    filename: 'build.js',
+    publicPath: '/'
   },
 	module: {
 	  rules: [
