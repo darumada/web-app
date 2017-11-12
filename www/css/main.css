@@ -3,7 +3,7 @@
 	padding: 0;
 }
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 .weather {
 	color: white;
@@ -28,11 +28,8 @@ body {
 	margin-left: 10px;
 	font-size: 35px;
 }
-.weather .weather_temp-block .weather_temp span{
-	font-size: 24px;
-	position: relative;
-	bottom: 7px;
-	right: 7px;
+.weather .weather_temp-block .weather_temp i{
+	font-size: 34px;
 }
 .weather .weather_temp-block .icon {
 	font-size: 40px;

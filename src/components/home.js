@@ -15,7 +15,7 @@ class Home extends React.Component {
 					<h3 className='weather_title'>Aqtobe</h3>
 					<div className="weather_temp-block">
 						{renderIcon(this.props.icon)}
-						<p className='weather_temp'>{this.props.temp} <span>°C</span></p>
+						<p className='weather_temp'>{this.props.temp}<i className='wi wi-celsius'></i></p>
 					</div>
 				</div>
 			</div>

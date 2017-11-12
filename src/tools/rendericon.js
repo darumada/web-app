@@ -19,7 +19,7 @@ function renderIcon(data) {
 		break;
 		case '13d' : iconClass += 'wi-day-snow';
 		break;
-		case '50d' : iconClass += 'wi-smog';
+		case '50d' : iconClass += 'wi-smoke';
 		break;
 		case '01n' : iconClass += 'wi-night-clear';
 		break;
@@ -37,7 +37,7 @@ function renderIcon(data) {
 		break;
 		case '13n' : iconClass += 'wi-night-alt-snow';
 		break;
-		case '50n' : iconClass += 'wi-smog';
+		case '50n' : iconClass += 'wi-smoke';
 		break;
 	}
 	return <i className={iconClass}></i>
