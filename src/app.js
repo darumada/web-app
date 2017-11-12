@@ -1,41 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import {connect} from 'react-redux';
-import Menu from './menu';
-import Home from './home';
-import Calendar from './calendar';
-import Settings from './settings';
+import { HashRouter, Route, Switch, Redirect} from 'react-router-dom';
+import Menu from './components/menu';
+import Home from './components/home';
+import Calendar from './components/calendar';
+import Settings from './components/settings';
 
 class App extends React.Component{
 	constructor(props) {
 		super(props);
-		this.props.onAddTrack();
 	}
 	render() {
-		console.log(this.props.testStore);
 		return (
-			<BrowserRouter>
+			<HashRouter>
 				<div className='container'>
 					<Switch>
-						<Route exact path='/' component={Home} />
+					  <Redirect exact from='/' to='/home' />
+						<Route path='/home'  component={Home} />
 						<Route path='/calendar' component={Calendar} />
 						<Route path='/settings' component={Settings} />
 					</Switch>
 					<Menu/>	
 				</div>
-			</BrowserRouter>
+			</HashRouter>
 		)
 	}
 }
 
-export default connect(
-		state => ({
-			testStore: state
-		}),
-		dispatch => ({
-			onAddTrack: () => {
-				dispatch({type: 'ADD_TRACK', song:'123'})
-			}
-		})
-	)(App);
+export default App;

@@ -2,3 +2,68 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	font-family: 'Roboto', sans-serif;
+}
+.weather {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px 0 0;
+	background-color: #ea76f7;
+}
+.weather .weather_title {
+	font-size: 15px;
+}
+.weather .weather_temp-block {
+	display: flex;
+	width: 150px;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+}
+.weather .weather_temp-block .weather_temp{
+	margin-left: 10px;
+	font-size: 35px;
+}
+.weather .weather_temp-block .weather_temp span{
+	font-size: 24px;
+	position: relative;
+	bottom: 7px;
+	right: 7px;
+}
+.weather .weather_temp-block .icon {
+	font-size: 40px;
+	color: black;
+	margin-right: 10px;
+} 
+.menu {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+}
+.menu li {
+	width: 100%;
+}
+.menu li:last-child {
+	border-right: none;
+}
+.menu a {
+	transition: all .5s;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 20px;
+	background-color: #777777;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	color: white;
+}
+.menu a.active {
+	color: black;
+}

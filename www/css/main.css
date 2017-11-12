@@ -2,6 +2,9 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	font-family: 'Roboto', sans-serif;
+}
 .weather {
 	color: white;
 	display: flex;
@@ -51,6 +54,7 @@
 	border-right: none;
 }
 .menu a {
+	transition: all .5s;
 	display: inline-block;
 	text-decoration: none;
 	font-size: 20px;
