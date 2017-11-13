@@ -47,10 +47,5 @@ class App extends React.Component{
 export default connect(
 	state => ({
 		isLogin: state.userReducer.isLogin
-	}),
-	dispatch => ({
-		doRequest: () => {
-
-		}
 	})
-	)(App);
+)(App);
