@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 
 class Menu extends React.Component{
 	render() {
-		return <ul className="menu">
+		return <ul className="menu" style={this.props.style}>
 						<li><NavLink exact activeClassName='active' to='/home'><i className="fa fa-home" aria-hidden="true"></i></NavLink></li>
 						<li><NavLink activeClassName='active' to='/calendar'><i className="fa fa-calendar" aria-hidden="true"></i></NavLink></li>
 						<li><NavLink activeClassName='active' to='/three'><i className="fa fa-calendar" aria-hidden="true"></i></NavLink></li>

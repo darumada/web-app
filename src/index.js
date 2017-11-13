@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './app';
-import weatherReducer from './redux/weatherreducer';
+import combineReducers from './redux/reducers';
 
 
-const store = createStore(weatherReducer);
+const store = createStore(combineReducers);
 
 ReactDOM.render(
 	<Provider store={store}>

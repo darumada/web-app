@@ -25,8 +25,8 @@ class Home extends React.Component {
 
 export default connect(
 		state => ({
-			temp: state.temp,
-			icon: state.icon
+			temp: state.weatherReducer.temp,
+			icon: state.weatherReducer.icon
 		}),
 		dispatch => ({
 			updateWeather: () => {
