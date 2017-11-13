@@ -13,11 +13,9 @@ class App extends React.Component{
 		super(props);
 	}
 	firstPage(isLogin) {
-		console.log(isLogin)
 		return isLogin ? '/home' : '/login';
 	}
 	renderMenu(isLogin) {
-		console.log(isLogin);
 		let styleObj = {
 			display : 'flex'
 		}

@@ -8,14 +8,19 @@ class Home extends React.Component {
 		super(props);
 		this.props.updateWeather();
 	}
-	loadWeather(isRun) {
-		return isRun ? "loading" : "weather";
+	loadPage(isRun) {
+		return isRun ? "loading" : "loaded";
 	}
 	render() {	
-		console.log(this.props.state);
 		return (
-			<div>
-				<div className={this.loadWeather(this.props.isRun)}>
+			<div className={this.loadPage(this.props.isRun)}>
+				<div className="cssload-thecube">
+					<div className="cssload-cube cssload-c1"></div>
+					<div className="cssload-cube cssload-c2"></div>
+					<div className="cssload-cube cssload-c4"></div>
+					<div className="cssload-cube cssload-c3"></div>
+				</div>
+				<div className='weather'>
 					<h3 className='weather_title'>Aqtobe</h3>
 					<div className="weather_temp-block">
 						{renderIcon(this.props.icon)}
@@ -37,8 +42,6 @@ export default connect(
 			updateWeather: () => {
 				dispatch({type: 'UPDATE_WEATHER'});
 				fetch('http://api.openweathermap.org/data/2.5/weather?id=610611&APPID=8b016ecf4ba38cde09861362f7f981e9&units=metric').then((response) => {				
-					return response;
-				}).then((response) => {
 					response.json().then((data)=>{
 						dispatch({type: 'UPDATE_WEATHER_OK', temp : data.main.temp, icon : data.weather[0].icon})
 					});

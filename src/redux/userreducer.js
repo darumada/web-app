@@ -10,11 +10,11 @@ const userReducer = (state = initialState, action) => {
 			break;
 		}
 		case 'DO_REQUEST_OK' : {
-			return {...state, response : action.response , isRun : false}
+			return {...state, isLogin : action.isLogin , isRun : false}
 			break;
 		}
 		case 'DO_REQUEST_ERROR' : {
-			return {...state,error : action.err ,isRun: false}
+			return {...state,error : action.error ,isRun: false}
 			break;
 		}
 	}
