@@ -8,10 +8,14 @@ class Home extends React.Component {
 		super(props);
 		this.props.updateWeather();
 	}
+	loadWeather(isRun) {
+		return isRun ? "loading" : "weather";
+	}
 	render() {	
+		console.log(this.props.state);
 		return (
 			<div>
-				<div className="weather">
+				<div className={this.loadWeather(this.props.isRun)}>
 					<h3 className='weather_title'>Aqtobe</h3>
 					<div className="weather_temp-block">
 						{renderIcon(this.props.icon)}
@@ -25,6 +29,7 @@ class Home extends React.Component {
 
 export default connect(
 		state => ({
+			isRun : state.weatherReducer.isRun,
 			temp: state.weatherReducer.temp,
 			icon: state.weatherReducer.icon
 		}),

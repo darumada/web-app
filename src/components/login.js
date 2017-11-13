@@ -28,10 +28,10 @@ export default connect(
 				return response;
 			}).then((response) => {
 				response.json().then((data) => {
-				dispatch({type:'DO_REQUEST_OK', response : data, isRun : false})
+				dispatch({type:'DO_REQUEST_OK', response : data})
 			});
 			}).catch((err) => {
-				dispatch({type: 'DO_REQUEST_ERROR', error : err, isRun : false})
+				dispatch({type: 'DO_REQUEST_ERROR', error : err})
 			})
 		}
 	})

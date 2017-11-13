@@ -14,6 +14,9 @@ body {
 	padding: 20px 0 0;
 	background-color: #ea76f7;
 }
+.loading {
+	display: none;
+}
 .weather .weather_title {
 	font-size: 15px;
 }
