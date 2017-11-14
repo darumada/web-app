@@ -107,10 +107,16 @@ body {
 		-webkit-transform: rotateZ(45deg);
 		-moz-transform: rotateZ(45deg);
 }
+.loading {
+	margin-top: 55%;
+}
 .loading .cssload-thecube {
 	display: block;
 }
 .loading .weather {
+	display: none;
+}
+.loading .login {
 	display: none;
 }
 .cssload-thecube .cssload-cube {

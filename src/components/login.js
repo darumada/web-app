@@ -44,7 +44,7 @@ export default connect(
 				data.append(input.name, input.value);
 			});
 			dispatch({type: 'DO_REQUEST', isRun : true});
-			fetch('http://192.168.1.123/', {
+			fetch('http://192.168.1.5/', {
 				method: "POST",
 				body: data
 			}).then((response) => {
