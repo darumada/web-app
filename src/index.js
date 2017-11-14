@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import App from './app';
 import combineReducers from './redux/reducers';
 
-
 const store = createStore(combineReducers);
 
 ReactDOM.render(

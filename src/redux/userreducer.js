@@ -1,7 +1,8 @@
 const initialState = {
-	isLogin : false,
+	isLogin : (localStorage.getItem('isLogin') === 'false' || localStorage.getItem('isLogin') === null) ? false : true,
 	isRun : false,
-	error: null
+	error: null,
+	id: null
 };
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -16,6 +17,9 @@ const userReducer = (state = initialState, action) => {
 		case 'DO_REQUEST_ERROR' : {
 			return {...state,error : action.error ,isRun: false}
 			break;
+		}
+		case 'EXIT' : {
+			return {...state,isLogin : false}
 		}
 	}
 	return state;

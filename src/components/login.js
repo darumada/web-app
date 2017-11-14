@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import {HashRouter, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component{
 	loadPage(isRun) {
@@ -44,12 +44,13 @@ export default connect(
 				data.append(input.name, input.value);
 			});
 			dispatch({type: 'DO_REQUEST', isRun : true});
-			fetch('http://192.168.1.4/', {
+			fetch('http://192.168.1.123/', {
 				method: "POST",
 				body: data
 			}).then((response) => {
 				response.json().then((data) => {
 					dispatch({type:'DO_REQUEST_OK', isLogin : !!data});
+					localStorage.setItem('isLogin', !!data);
 				});
 			}).catch((err) => {
 				dispatch({type: 'DO_REQUEST_ERROR', error : err})
