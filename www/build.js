@@ -35326,6 +35326,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 		exitBtnClick: function exitBtnClick() {
 			dispatch({ type: 'EXIT' });
 			localStorage.removeItem('isLogin');
+			localStorage.removeItem('id');
 		}
 	};
 })(Settings);
@@ -35434,13 +35435,14 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 				data.append(input.name, input.value);
 			});
 			dispatch({ type: 'DO_REQUEST', isRun: true });
-			fetch('http://192.168.1.5/', {
+			fetch('http://app/', {
 				method: "POST",
 				body: data
 			}).then(function (response) {
 				response.json().then(function (data) {
-					dispatch({ type: 'DO_REQUEST_OK', isLogin: !!data });
-					localStorage.setItem('isLogin', !!data);
+					dispatch({ type: 'DO_REQUEST_OK', isLogin: data.isLogin, id: data.id });
+					localStorage.setItem('isLogin', data.isLogin);
+					localStorage.setItem('id', data.id);
 				});
 			}).catch(function (err) {
 				dispatch({ type: 'DO_REQUEST_ERROR', error: err });
@@ -35537,7 +35539,7 @@ var initialState = {
 	isLogin: localStorage.getItem('isLogin') === 'false' || localStorage.getItem('isLogin') === null ? false : true,
 	isRun: false,
 	error: null,
-	id: null
+	id: localStorage.getItem('id') === 'false' || localStorage.getItem('id') === null ? null : localStorage.getItem('id')
 };
 var userReducer = function userReducer() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -35551,7 +35553,7 @@ var userReducer = function userReducer() {
 			}
 		case 'DO_REQUEST_OK':
 			{
-				return _extends({}, state, { isLogin: action.isLogin, isRun: false });
+				return _extends({}, state, { isLogin: action.isLogin, id: action.id, isRun: false });
 				break;
 			}
 		case 'DO_REQUEST_ERROR':
@@ -35561,7 +35563,7 @@ var userReducer = function userReducer() {
 			}
 		case 'EXIT':
 			{
-				return _extends({}, state, { isLogin: false });
+				return _extends({}, state, { isLogin: false, id: null });
 			}
 	}
 	return state;

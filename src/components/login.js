@@ -44,13 +44,14 @@ export default connect(
 				data.append(input.name, input.value);
 			});
 			dispatch({type: 'DO_REQUEST', isRun : true});
-			fetch('http://192.168.1.5/', {
+			fetch('http://app/', {
 				method: "POST",
 				body: data
 			}).then((response) => {
 				response.json().then((data) => {
-					dispatch({type:'DO_REQUEST_OK', isLogin : !!data});
-					localStorage.setItem('isLogin', !!data);
+					dispatch({type:'DO_REQUEST_OK', isLogin : data.isLogin, id : data.id});
+					localStorage.setItem('isLogin', data.isLogin);
+					localStorage.setItem('id', data.id);
 				});
 			}).catch((err) => {
 				dispatch({type: 'DO_REQUEST_ERROR', error : err})

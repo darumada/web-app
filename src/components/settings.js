@@ -24,6 +24,7 @@ export default connect(
 		exitBtnClick: () => {
 			dispatch({type: 'EXIT'});
 			localStorage.removeItem('isLogin');
+			localStorage.removeItem('id');
 		}
 	})
 	)(Settings);
