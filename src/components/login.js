@@ -44,7 +44,7 @@ export default connect(
 				data.append(input.name, input.value);
 			});
 			dispatch({type: 'DO_REQUEST', isRun : true});
-			fetch('http://app/', {
+			fetch('http://server/', {
 				method: "POST",
 				body: data
 			}).then((response) => {
