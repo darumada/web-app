@@ -7,6 +7,7 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.props.updateWeather();
+		this.props.updateShedule();
 	}
 	loadPage(isRun) {
 		return isRun ? "loading" : "loaded";
@@ -26,6 +27,17 @@ class Home extends React.Component {
 						{renderIcon(this.props.icon)}
 						<p className='weather_temp'>{this.props.temp}<i className='wi wi-celsius'></i></p>
 					</div>
+				</div>
+				<div className='shedule'>
+					<select onChange={this.props.updateShedule}>
+					  <option value='Числитель'>Числитель</option>
+					  <option value='Знаменатель'>Знаменатель</option>
+					</select>
+					<ul className='shedule-list'>
+						<li>123</li>
+						<li>123</li>
+						<li>123</li>
+					</ul>
 				</div>
 			</div>
 			)
@@ -47,8 +59,15 @@ export default connect(
 					});
 				}).catch((err) => {
 					dispatch({type: "UPDATE_WEATHER_ERROR", error : err})
+				})		
+			},
+			updateShedule: () => {
+				const data = new FormData();
+				dispatch({type: 'UPDATE_SHEDULE'});
+				fetch('http://server/', {
+					method: "POST",
+					body: data
 				})
-				
 			}
 		})
 	)(Home);
