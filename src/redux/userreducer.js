@@ -20,6 +20,7 @@ const userReducer = (state = initialState, action) => {
 		}
 		case 'EXIT' : {
 			return {...state,isLogin : false, id : null,}
+			break;
 		}
 	}
 	return state;

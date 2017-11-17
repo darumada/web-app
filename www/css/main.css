@@ -119,6 +119,9 @@ body {
 .loading .login {
 	display: none;
 }
+.loading .shedule {
+	display: none;
+}
 .cssload-thecube .cssload-cube {
 	position: relative;
 	transform: rotateZ(45deg);
