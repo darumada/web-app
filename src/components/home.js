@@ -35,7 +35,28 @@ class Home extends React.Component {
 					</select>
 				)	
 			}
-		}	
+		}	else {
+				return (
+						<select onChange={this.props.updateShedule}>
+							<option defaultValue value='Числитель'>Числитель</option>
+							<option value='Знаменатель'>Знаменатель</option>
+						</select>
+					)	
+		}
+	}
+	renderShedule() {
+		if (this.props.lessons) {
+			const arr = [];
+			this.props.lessons.forEach((item) => {
+				if (item) {
+					arr.push(item);
+				}
+			});
+			const list = arr.map((item, index) => 
+				<li key={index}>{item}</li>
+			);
+			return list;
+		}
 	}
 	render() {	
 		return (
@@ -55,11 +76,8 @@ class Home extends React.Component {
 				</div>
 				<div className='shedule'>
 					{this.renderSelect()}
-					<ul className='shedule-list'>
-						<li>123</li>
-						<li>123</li>
-						<li>123</li>
-					</ul>
+					<h1>{this.props.group}</h1>
+					<ul className='shedule-list'>{this.renderShedule()}</ul>
 				</div>
 			</div>
 			)
@@ -68,6 +86,9 @@ class Home extends React.Component {
 
 export default connect(
 		state => ({
+			state: state,
+			lessons: state.sheduleReducer.lessons,
+			group: state.sheduleReducer.group,
 			temp: state.weatherReducer.temp,
 			icon: state.weatherReducer.icon
 		}),
@@ -107,7 +128,7 @@ export default connect(
 						dispatch({type: 'UPDATE_SHEDULE_OK', lessons : data.lessons, group : data.group, day : data.day})
 					});
 				}).catch((err) => {
-					dispatch({type: 'UPDATE_SHEDULE_ERROR', error : err})
+					dispatch({type: 'UPDATE_SHEDULE_ERROR', error : error})
 				})
 			}
 		})

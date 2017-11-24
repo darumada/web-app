@@ -12852,7 +12852,7 @@ var _app = __webpack_require__(414);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _reducers = __webpack_require__(446);
+var _reducers = __webpack_require__(447);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31865,15 +31865,15 @@ var _home = __webpack_require__(441);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _calendar = __webpack_require__(443);
+var _calendar = __webpack_require__(444);
 
 var _calendar2 = _interopRequireDefault(_calendar);
 
-var _settings = __webpack_require__(444);
+var _settings = __webpack_require__(445);
 
 var _settings2 = _interopRequireDefault(_settings);
 
-var _login = __webpack_require__(445);
+var _login = __webpack_require__(446);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -35029,6 +35029,10 @@ var _rendericon = __webpack_require__(442);
 
 var _rendericon2 = _interopRequireDefault(_rendericon);
 
+var _getday = __webpack_require__(443);
+
+var _getday2 = _interopRequireDefault(_getday);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35046,20 +35050,98 @@ var Home = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
 		_this.props.updateWeather();
+		_this.props.updateShedule('Числитель');
 		return _this;
 	}
 
 	_createClass(Home, [{
 		key: 'loadPage',
-		value: function loadPage(isRun) {
-			return isRun ? "loading" : "loaded";
+		value: function loadPage() {
+			if (this.props.state.weatherReducer.isRun || this.props.state.sheduleReducer.isRun) {
+				return 'loading';
+			} else {
+				return 'loaded';
+			}
+		}
+	}, {
+		key: 'renderSelect',
+		value: function renderSelect() {
+			if (localStorage.getItem('type')) {
+				if (localStorage.getItem('type') == 'Числитель') {
+					return _react2.default.createElement(
+						'select',
+						{ onChange: this.props.updateShedule },
+						_react2.default.createElement(
+							'option',
+							{ defaultValue: true, value: '\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C' },
+							'\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: '\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C' },
+							'\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C'
+						)
+					);
+				}
+				if (localStorage.getItem('type') == 'Знаменатель') {
+					return _react2.default.createElement(
+						'select',
+						{ onChange: this.props.updateShedule },
+						_react2.default.createElement(
+							'option',
+							{ value: '\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C' },
+							'\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C'
+						),
+						_react2.default.createElement(
+							'option',
+							{ defaultValue: true, value: '\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C' },
+							'\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C'
+						)
+					);
+				} else {
+					return _react2.default.createElement(
+						'select',
+						{ onChange: this.props.updateShedule },
+						_react2.default.createElement(
+							'option',
+							{ defaultValue: true, value: '\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C' },
+							'\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: '\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C' },
+							'\u0417\u043D\u0430\u043C\u0435\u043D\u0430\u0442\u0435\u043B\u044C'
+						)
+					);
+				}
+			}
+		}
+	}, {
+		key: 'renderShedule',
+		value: function renderShedule() {
+			if (this.props.lessons) {
+				var arr = [];
+				this.props.lessons.forEach(function (item) {
+					if (item) {
+						arr.push(item);
+					}
+				});
+				var list = arr.map(function (item, index) {
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						item
+					);
+				});
+				return list;
+			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: this.loadPage(this.props.isRun) },
+				{ className: this.loadPage() },
 				_react2.default.createElement(
 					'div',
 					{ className: 'cssload-thecube' },
@@ -35087,6 +35169,21 @@ var Home = function (_React$Component) {
 							_react2.default.createElement('i', { className: 'wi wi-celsius' })
 						)
 					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'shedule' },
+					this.renderSelect(),
+					_react2.default.createElement(
+						'h1',
+						null,
+						this.props.group
+					),
+					_react2.default.createElement(
+						'ul',
+						{ className: 'shedule-list' },
+						this.renderShedule()
+					)
 				)
 			);
 		}
@@ -35097,7 +35194,9 @@ var Home = function (_React$Component) {
 
 exports.default = (0, _reactRedux.connect)(function (state) {
 	return {
-		isRun: state.weatherReducer.isRun,
+		state: state,
+		lessons: state.sheduleReducer.lessons,
+		group: state.sheduleReducer.group,
 		temp: state.weatherReducer.temp,
 		icon: state.weatherReducer.icon
 	};
@@ -35111,6 +35210,34 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 				});
 			}).catch(function (err) {
 				dispatch({ type: "UPDATE_WEATHER_ERROR", error: err });
+			});
+		},
+		updateShedule: function updateShedule(value) {
+			var data = new FormData();
+			var date = new Date();
+			var select = document.querySelector('select');
+			if (!select) {
+				if (localStorage.getItem('type')) {
+					data.set('type', localStorage.getItem('type'));
+				} else {
+					data.set('type', value);
+				}
+			} else {
+				localStorage.setItem('type', select.value);
+				data.set('type', select.value);
+			}
+			data.set('id', localStorage.getItem('id'));
+			data.set('day', (0, _getday2.default)(date));
+			dispatch({ type: 'UPDATE_SHEDULE' });
+			fetch('http://server/shedule.php', {
+				method: "POST",
+				body: data
+			}).then(function (response) {
+				response.json().then(function (data) {
+					dispatch({ type: 'UPDATE_SHEDULE_OK', lessons: data.lessons, group: data.group, day: data.day });
+				});
+			}).catch(function (err) {
+				dispatch({ type: 'UPDATE_SHEDULE_ERROR', error: err });
 			});
 		}
 	};
@@ -35206,6 +35333,59 @@ exports.default = renderIcon;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+function getDay(date) {
+	var day = void 0;
+	switch (date.getDay()) {
+		case 0:
+			{
+				day = 'Воскресенье';
+				break;
+			}
+		case 1:
+			{
+				day = 'Понедельник';
+				break;
+			}
+		case 2:
+			{
+				day = 'Вторник';
+				break;
+			}
+		case 3:
+			{
+				day = 'Среда';
+				break;
+			}
+		case 4:
+			{
+				day = 'Четверг';
+				break;
+			}
+		case 5:
+			{
+				day = 'Пятница';
+				break;
+			}
+		case 6:
+			{
+				day = 'Суббота';
+				break;
+			}
+	}
+	return day;
+}
+exports.default = getDay;
+
+/***/ }),
+/* 444 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -35255,7 +35435,7 @@ var Calendar = function (_React$Component) {
 exports.default = Calendar;
 
 /***/ }),
-/* 444 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35332,7 +35512,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 })(Settings);
 
 /***/ }),
-/* 445 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35452,7 +35632,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 })(Login);
 
 /***/ }),
-/* 446 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35464,23 +35644,28 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(109);
 
-var _weatherreducer = __webpack_require__(447);
+var _weatherreducer = __webpack_require__(448);
 
 var _weatherreducer2 = _interopRequireDefault(_weatherreducer);
 
-var _userreducer = __webpack_require__(448);
+var _userreducer = __webpack_require__(449);
 
 var _userreducer2 = _interopRequireDefault(_userreducer);
+
+var _shedulereducer = __webpack_require__(450);
+
+var _shedulereducer2 = _interopRequireDefault(_shedulereducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   weatherReducer: _weatherreducer2.default,
-  userReducer: _userreducer2.default
+  userReducer: _userreducer2.default,
+  sheduleReducer: _shedulereducer2.default
 });
 
 /***/ }),
-/* 447 */
+/* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35523,7 +35708,7 @@ var weatherReducer = function weatherReducer() {
 exports.default = weatherReducer;
 
 /***/ }),
-/* 448 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35564,12 +35749,56 @@ var userReducer = function userReducer() {
 		case 'EXIT':
 			{
 				return _extends({}, state, { isLogin: false, id: null });
+				break;
 			}
 	}
 	return state;
 };
 
 exports.default = userReducer;
+
+/***/ }),
+/* 450 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var initialState = {
+	isRun: false,
+	error: null
+};
+var sheduleReducer = function sheduleReducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	switch (action.type) {
+		case 'UPDATE_SHEDULE':
+			{
+				return _extends({}, state, { isRun: true });
+				break;
+			}
+		case 'UPDATE_SHEDULE_OK':
+			{
+				return _extends({}, state, { isRun: false, lessons: action.lessons, group: action.group, day: action.day });
+				break;
+			}
+		case 'UPDATE_SHEDULE_ERROR':
+			{
+				return _extends({}, state, { isRun: false, error: action.error });
+				break;
+			}
+	}
+	return state;
+};
+
+exports.default = sheduleReducer;
 
 /***/ })
 /******/ ]);

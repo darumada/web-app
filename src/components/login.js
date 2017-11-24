@@ -49,9 +49,9 @@ export default connect(
 				body: data
 			}).then((response) => {
 				response.json().then((data) => {
-					dispatch({type:'DO_REQUEST_OK', isLogin : data.isLogin, id : data.id});
 					localStorage.setItem('isLogin', data.isLogin);
 					localStorage.setItem('id', data.id);
+					dispatch({type:'DO_REQUEST_OK', isLogin : data.isLogin, id : data.id});
 				});
 			}).catch((err) => {
 				dispatch({type: 'DO_REQUEST_ERROR', error : err})
